@@ -17,12 +17,16 @@ const taskSchema = new mongoose.Schema({
     },
     priority:{
         type: String,
-        enum: ["1","2","3","4","5"],
-        default: "5"
+        enum: ["Low", "Medium", "High"],
+        default: "Low"
     },
     date: {
         type: String,
         required: true
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false
     }
 },{timestamps: true})
 

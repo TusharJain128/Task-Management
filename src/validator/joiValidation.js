@@ -40,3 +40,32 @@ exports.updateUserJoi = Joi.object({
     mobile:Joi.string().trim().regex(/^[5-9]{1}[0-9]{9}$/).message("please enter valid mobile number")
 
 })
+
+//---------------------------------Create Task-------------------------------------->
+
+exports.createTaskJoi = Joi.object({
+
+    task: Joi.string().trim().required().regex(/^[a-zA-Z ]+$/).message("please write task in valid syntex"),
+
+    status: Joi.string().trim().optional().valid("Pending","Successful","Cancel"),
+
+    priority:Joi.string().trim().optional().valid("Low", "Medium", "High"),
+
+    date:Joi.string().trim().required()
+
+})
+
+
+//---------------------------------Update Task-------------------------------------->
+
+exports.updateTaskJoi = Joi.object({
+
+    task: Joi.string().trim().optional().regex(/^[a-zA-Z ]+$/).message("please write task in valid syntex"),
+
+    status: Joi.string().trim().optional().valid("Pending","Successful","Cancel"),
+
+    priority:Joi.string().trim().optional().valid("Low", "Medium", "High"),
+
+    date:Joi.string().trim().optional()
+
+})

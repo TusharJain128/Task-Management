@@ -60,7 +60,7 @@ module.exports.loginUser= async function(req,res){
             return res.status(400).send({status:false, message:"Please enter correct password"})
         }
         else{
-            let token = jwt.sign({userId: checkEmail._id}, "special secret key", {expiresIn: "10m" })
+            let token = jwt.sign({userId: checkEmail._id}, "special secret key", {expiresIn: "30m" })
             res.status(200).send({status:true, token: token})
         }
     }
