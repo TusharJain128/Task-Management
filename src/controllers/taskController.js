@@ -25,7 +25,21 @@ module.exports.createTask = async function(req,res){
 
 module.exports.getAllTasks = async function(req, res){
     try {
-        let getDetails = await taskModel.find({isDeleted: false})
+        let { priority, status } = req.query;
+
+        let filter = {isDeleted: false}
+
+        if(priority){
+            if(!["Low", "Medium", "High"].includes(priority)) return res.status(400).send({status:false, message:"You can filter priority by Low,Medium,High"})
+            filter.priority = priority
+        }
+
+        if(status){
+            if(!["Pending","Successful","Cancel"].includes(priority)) return res.status(400).send({status:false, message:"You can filter status by Pending,Successful,Cancel"})
+            filter.status = status
+        }
+
+        let getDetails = await taskModel.find( filter )
         return res.status(200).send({status: true, message: getDetails})
     } 
     catch (error) {
