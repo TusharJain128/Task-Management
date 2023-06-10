@@ -27,7 +27,7 @@ module.exports.autherization = async function(req,res,next){
 
         if(!mongoose.isValidObjectId(userId)) return res.status(400).send({status: false, message: "Please enter valid userId in params"})
         
-        let getUserDetails = await userModel.findOne({userId: userId, isDeleted:false})
+        let getUserDetails = await userModel.findOne({_id: userId, isDeleted:false})
         if(!getUserDetails) return res.status(400).send({status:false, message:"User is not found"})
 
         if(userId !== req.decode.userId){
